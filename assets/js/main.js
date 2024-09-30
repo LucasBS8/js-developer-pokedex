@@ -7,7 +7,7 @@ let offset = 0;
 
 function convertPokemonToLi(pokemon) {
     return `
-        <li class="pokemon ${pokemon.type}">
+        <li class="pokemon ${pokemon.type}" onclick="handlePokemonClick(${pokemon.number})">
             <span class="number">#${pokemon.number}</span>
             <span class="name">${pokemon.name}</span>
 
@@ -17,11 +17,17 @@ function convertPokemonToLi(pokemon) {
                 </ol>
 
                 <img src="${pokemon.photo}"
-                     alt="${pokemon.name}">
+                    alt="${pokemon.name}">
             </div>
         </li>
     `
 }
+
+function handlePokemonClick(pokemonNumber) {
+    // Redireciona para a página de detalhes com o número do Pokémon na URL
+    window.location.href = `/details.html?pokemon=${pokemonNumber}`;
+}
+
 
 function loadPokemonItens(offset, limit) {
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
